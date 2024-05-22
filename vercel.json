@@ -1,0 +1,16 @@
+{
+   "version": 2,
+   "name": "FoodDeliveryApp_Stripe_Server",
+   "builds": [
+      {
+         "src": "index.cjs",
+         "use": "@vercel/node"
+      }
+   ],
+   "routes": [
+      {
+         "src": "/(.*)",
+         "dest": "/"
+      }
+   ]
+}
