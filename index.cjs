@@ -37,10 +37,12 @@ app.post('/payment-sheet', async (req, res) => {
    });
 });
 
+app.get('/', (req, res) => {
+   res.status(200).json({ 'msg': "SERVER IS UP" })
+})
 
 app.listen(port, () => {
-   console.log('App is listening on Port : ' + port)
-   console.log(process.env.STRIPE_SECRET_KEY)
+   console.log('App is listening on PORT : ' + port)
 })
 
 
