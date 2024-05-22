@@ -1,12 +1,33 @@
-const express = require('express')
-const dotenv = require('dotenv').config()
-const cors = require('cors')
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from "cors";
+import Stripe from 'stripe';
 
 const app = express()
-const port = process.env.PORT || 3000
+dotenv.config()
+Stripe(process.env.STRIPE_SECRET_KEY)
 
-console.log(stripe)
+console.log(Stripe)
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.get('/', (req, res) => {
+   res.status(200).json({
+      "msg": "SERVER IS UP"
+   })
+})
+
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+   console.log('Listening on Port:' + port)
+})
+
+
+
+// stripe(process.env.STRIPE_SECRET_KEY)
+// dotenv.config()
+// const app = express()
+// const port = process.env.PORT || 3000
 
 // app.use(express.json())
 // app.use(express.urlencoded({ extended: true }))
@@ -19,7 +40,7 @@ console.log(stripe)
 //       { customer: customer.id },
 //       { apiVersion: '2024-04-10' }
 //    );
-//    const paymentIntent = await stripe.paymentIntents.create({
+//    const paymentIntent = await Stripe.paymentIntents.create({
 //       amount: 1099,
 //       currency: 'eur',
 //       customer: customer.id,
