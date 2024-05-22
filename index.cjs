@@ -8,7 +8,9 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+app.use(cors({
+   origin: '*', // allows all domains and origin to use this api
+}))
 
 app.post('/payment-sheet', async (req, res) => {
    // Use an existing Customer ID if this is a returning customer.
