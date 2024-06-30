@@ -14,7 +14,6 @@ app.use(cors({
 
 app.post('/payment-sheet', async (req, res) => {
    try {
-      console.log(req.body)
       const { amount } = req.body
       // Use an existing Customer ID if this is a returning customer.
       const customer = await stripe.customers.create();
@@ -42,7 +41,6 @@ app.post('/payment-sheet', async (req, res) => {
    } catch (error) {
       res.status(500).json({
          'Error': error,
-         'Req.body': req.body
       })
    }
 });
