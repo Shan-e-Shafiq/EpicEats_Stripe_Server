@@ -14,16 +14,16 @@ app.use(cors({
 
 app.post('/payment-sheet', async (req, res) => {
    try {
-      const { amount, customerID } = req.body
-      const customer = customerID
+      const { amount } = req.body
+      const customer = await stripe.customers.create();
       const ephemeralKey = await stripe.ephemeralKeys.create(
-         { customer: customer },
+         { customer: customer.id },
          { apiVersion: '2024-04-10' }
       );
       const paymentIntent = await stripe.paymentIntents.create({
          amount: amount,
          currency: 'pkr',
-         customer: customer,
+         customer: customer.id,
          automatic_payment_methods: {
             enabled: true,
          },
@@ -31,7 +31,7 @@ app.post('/payment-sheet', async (req, res) => {
       res.json({
          paymentIntent: paymentIntent.client_secret,
          ephemeralKey: ephemeralKey.secret,
-         customer: customer,
+         customer: customer.id,
          publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
       });
    } catch (error) {
