@@ -22,8 +22,8 @@ app.post('/payment-sheet', async (req, res) => {
          { apiVersion: '2024-04-10' }
       );
       const paymentIntent = await stripe.paymentIntents.create({
-         amount: amount * 100,
-         currency: 'usd',
+         amount: amount,
+         currency: 'pkr',
          customer: customer.id,
          // In the latest version of the API, specifying the `automatic_payment_methods` parameter
          // is optional because Stripe enables its functionality by default.
