@@ -1,6 +1,6 @@
 {
    "version": 2,
-   "name": "FoodDeliveryApp_Stripe_Server",
+   "name": "EpicEats_Stripe_Server",
    "builds": [
       {
          "src": "index.cjs",
